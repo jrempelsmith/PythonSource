@@ -1,4 +1,0 @@
-//
-// first comment
-// contents
-// contents
