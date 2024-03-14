@@ -30,7 +30,14 @@ public class RockPaperScissorsGame
     
     public RockPaperScissorsGame() // this is the constructor
     {
-        setupGame();
+        String str = "JavaTpoint! 13 + 13.0 = 26.0 false ";
+
+        Scanner scn = new Scanner(System.in);
+        //scn = scn.useDelimiter("3");
+
+        String x = scn.nextLine();
+
+        //setupGame();
     }
 
     public void run()
