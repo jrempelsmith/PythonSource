@@ -1,5 +1,5 @@
-import java.util.Random;
-import java.util.Scanner;
+import java.util.Random;     // need this for the random function
+import java.util.Scanner;    // need this for the user input function
 
 enum AttackType
 {
@@ -30,18 +30,24 @@ public class RockPaperScissorsGame
     
     public RockPaperScissorsGame() // this is the constructor
     {
-        setupGame();
+        
+        System.out.println(getUserInt(-3, 6));
+        
+        
+        
+        
+        //setupGame();
     }
 
-    public void run()
+    /*public void run()
     {
         System.out.println("Player 1 is a " + player1);
         System.out.println("Player 2 is a " + player1);
         //System.out.println("Game mode: " + mode);
         System.out.println("Number of rounds: " + numRounds);
-    }
+    }*/
 
-    private void setupGame()
+    /*private void setupGame()
     {
         System.out.println("Welcome to Rock-Paper-Scissors!");
         
@@ -108,9 +114,7 @@ public class RockPaperScissorsGame
         ///// END CHOOSE NUMBER OF ROUNDS SECTION /////
 
         System.out.println(); // blank line
-
-        scn.close();
-    }
+    }*/
 
     /*private void play()
     {
@@ -177,7 +181,7 @@ public class RockPaperScissorsGame
         }
     }*/
 
-    private AttackType playerChoose()
+    /*private AttackType playerChoose()
     {
         Scanner scn = new Scanner(System.in);
         int choice;
@@ -196,11 +200,10 @@ public class RockPaperScissorsGame
             choice = scn.nextInt();
         }
         
-        scn.close();
         return intToAttackType(choice);
-    }
+    }*/
 
-    private AttackType botChoose()
+    /*private AttackType botChoose()
     {
         Random rand = new Random();
         int randInt = rand.nextInt(2);
@@ -223,6 +226,52 @@ public class RockPaperScissorsGame
         {
             return AttackType.SCISSORS;
         }
+    }*/
+
+    // 'getRandomInt' returns a random integer that is at least 'min' and at most 'max'.
+    private int getRandomInt(int min, int max)
+    {
+        Random rand = new Random();
+        return min + rand.nextInt(max - min + 1);
+    }
+
+    // 'getUserInt' loops until a valid integer has been submitted by the user that is at least 'min' and at most 'max'.
+    // The function returns the valid integer that the user typed in.
+    private int getUserInt(int min, int max)
+    {
+        Scanner scn = new Scanner(System.in);
+        
+        int userNumber = min - 1; // Set userNumber to be less than min, so that we enter the loop.
+        String prompt = "Enter an integer between " + min + " and " + max + ": ";
+        boolean repeat = false;
+
+        while (userNumber < min || userNumber > max) // Note: || means or
+        {
+            // Modify the prompt based on whether we are repeating or not.
+            if (repeat)
+            {
+                System.out.println("Number must be at least " + min + " and at most " + max + ".\n");
+                System.out.print(prompt);
+            }
+            else
+            {
+                repeat = true;
+                System.out.print(prompt);
+            }
+            
+            // Loop as long as an integer has NOT been inputted.
+            while (!scn.hasNextInt())
+            {
+                System.out.println("That is not an integer.\n");
+                System.out.print(prompt);
+                scn.next(); // Consume the next token. Note: scn.hasNextInt() does NOT consume the token.
+            }
+
+            // There is a valid integer, so grab that and store it in userNumber.
+            userNumber = scn.nextInt();
+        }
+
+        return userNumber;
     }
 }
 
