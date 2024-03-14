@@ -8,222 +8,44 @@ enum AttackType
     SCISSORS
 }
 
-enum PlayerType
-{
-    PLAYER,
-    BOT
-}
-
-enum GameMode
-{
-    BOT_VS_BOT,
-    PLAYER_VS_BOT,
-    PLAYER_VS_PLAYER
-}
-
 public class RockPaperScissorsGame
 {
-    PlayerType player1;
-    PlayerType player2;
-    //GameMode mode;
-    int numRounds;
-    
-    public RockPaperScissorsGame() // this is the constructor
+    public void run()
     {
-        
-        System.out.println(getUserInt(-3, 6));
-        
-        //setupGame();
-    }
+        boolean keepPlaying = true;
 
-    /*public void run()
-    {
-        System.out.println("Player 1 is a " + player1);
-        System.out.println("Player 2 is a " + player1);
-        //System.out.println("Game mode: " + mode);
-        System.out.println("Number of rounds: " + numRounds);
-    }*/
-
-    /*private void setupGame()
-    {
-        System.out.println("Welcome to Rock-Paper-Scissors!");
-        
-        System.out.println(); // blank line
-        
-        Scanner scn = new Scanner(System.in);
-        
-        ///// CHOOSE GAME MODE /////
-        System.out.println("Which game mode would you like to play?");
-        System.out.println("0: 0-player     (bot vs bot)");
-        System.out.println("1: 1-player  (player vs bot)");
-        System.out.println("2: 2-player  (player vs player)");
-        
-        int choice = -1; // give temporary value to enter the while loop
-        
-        // https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
-        while (choice < 0 || choice > 2)
+        while (keepPlaying)
         {
-            System.out.print("Type 0 or 1 or 2: ");
-            while (!scn.hasNextInt())
-            {
-                System.out.println("Must be an integer.");
-                scn.next();
-            }
-            choice = scn.nextInt();
-        }
+            // Code for the game goes here.
+            // 
+            // You can call the functions 'getRandomInt', 'getUserInt', and 'intToAttackType'
+            // to help run the program. You may also want to define your own functions.
+            //
+            // Note: Since those functions are defined in this class, and we are using them
+            // in this class, we can label them 'private'. If that's confusing, then just label
+            // all of them 'public' for now. We will learn about private vs. public later.
 
-        if (choice == 0)
-        {
-            //mode = GameMode.BOT_VS_BOT;
-            player1 = PlayerType.BOT;
-            player2 = PlayerType.BOT;
-        }
-        else if (choice == 1)
-        {
-            //mode = GameMode.PLAYER_VS_BOT;
-            player1 = PlayerType.PLAYER;
-            player2 = PlayerType.BOT;
-        }
-        else
-        {
-            //mode = GameMode.PLAYER_VS_PLAYER;
-            player1 = PlayerType.PLAYER;
-            player2 = PlayerType.PLAYER;
-        }
-        ///// END OF CHOOSE GAME MODE SECTION /////
 
-        System.out.println(); // blank line
 
-        ///// CHOOSE NUMBER OF ROUNDS /////
-        numRounds = -2; // give temporary value to enter the while loop
-        
-        while (numRounds <= 0 && numRounds % 2 == 0) // must be positive and odd
-        {
-            System.out.print("How many rounds would you like to play?\nMust be an odd, positive integer. ");
-            while (!scn.hasNextInt())
-            {
-                System.out.println("Must be an integer.");
-                scn.next();
-            }
-            numRounds = scn.nextInt();
-        }
+            // <code>
 
-        ///// END CHOOSE NUMBER OF ROUNDS SECTION /////
-
-        System.out.println(); // blank line
-    }*/
-
-    /*private void play()
-    {
-        if (mode == 0) // 0-player
-        {
-            AttackType bot1 = botChoose();
-            AttackType bot2 = botChoose();
-            String resultText = "";
-
-            if (bot1 == bot2)
-            {
-                resultText = "It's a tie.";
-            }
-
-            else if (bot1 == AttackType.ROCK)
-            {
-                if (bot2 == AttackType.PAPER)
-                {
-                    resultText = "Bot 2 wins.";
-                }
-                else
-                {
-                    resultText = "Bot 1 wins.";
-                }
-            }
-
-            else if (bot1 == AttackType.PAPER)
-            {
-                if (bot2 == AttackType.SCISSORS)
-                {
-                    resultText = "Bot 2 wins.";
-                }
-                else
-                {
-                    resultText = "Bot 1 wins.";
-                }
-            }
-
-            else if (bot1 == AttackType.SCISSORS)
-            {
-                if (bot2 == AttackType.ROCK)
-                {
-                    resultText = "Bot 2 wins.";
-                }
-                else
-                {
-                    resultText = "Bot 1 wins.";
-                }
-            }
             
-            System.out.println(bot1);
-            System.out.println(bot2);
-            System.out.println(resultText);
-        }
 
-        else if (mode == 1) // 1-player
-        {
-
-        }
-
-        else // 2-player
-        {
-
-        }
-    }*/
-
-    /*private AttackType playerChoose()
-    {
-        Scanner scn = new Scanner(System.in);
-        int choice;
-
-        ///// CHOOSE NUMBER OF ROUNDS /////
-        choice = -1; // give temporary value to enter the while loop
-        
-        while (choice < 0 || choice > 2) // must be 0, 1, or 2
-        {
-            System.out.print("Choose your move... ");
-            while (!scn.hasNextInt())
+            System.out.println("Do you want to play again?");
+            System.out.print("0->yes  1->no. Enter a number: ");
+            int keepPlayingInt = getUserInt(0, 1);
+            if (keepPlayingInt == 1)
             {
-                System.out.println("Must be an integer.");
-                scn.next();
+                keepPlaying = false;
             }
-            choice = scn.nextInt();
         }
-        
-        return intToAttackType(choice);
-    }*/
-
-    /*private AttackType botChoose()
-    {
-        Random rand = new Random();
-        int randInt = rand.nextInt(2);
-        
-        // 0->rock, 1->paper, 2->scissors
-        return intToAttackType(randInt);
     }
+    
 
-    private AttackType intToAttackType(int number)
-    {
-        if (number == 0)
-        {
-            return AttackType.ROCK;
-        }
-        else if (number == 1)
-        {
-            return AttackType.PAPER;
-        }
-        else
-        {
-            return AttackType.SCISSORS;
-        }
-    }*/
+            
+
+    
+    
 
     // 'getRandomInt' returns a random integer that is at least 'min' and at most 'max'.
     private int getRandomInt(int min, int max)
@@ -269,6 +91,18 @@ public class RockPaperScissorsGame
         }
 
         return userNumber;
+    }
+
+    // 'intToAttackType' converts an integer to an AttackType, where AttackType is an enum.
+    // The function returns the AttackType.
+    // number 0 --> Rock
+    // number 1 --> Paper
+    // number 2 --> Scissors
+    private AttackType intToAttackType(int number)
+    {
+        if (number == 0) { return AttackType.ROCK; }
+        else if (number == 1) { return AttackType.PAPER; }
+        else { return AttackType.SCISSORS; }
     }
 }
 
